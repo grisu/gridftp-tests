@@ -1,4 +1,4 @@
-package org.vpac.grisu.client.gridFtpTests.testElements;
+package org.vpac.grisu.clients.gridFtpTests.testElements;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -8,11 +8,11 @@ import java.util.Set;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 
-import org.vpac.grisu.client.gridFtpTests.GridFtpAction;
-import org.vpac.grisu.client.gridFtpTests.GridFtpActionItem;
-import org.vpac.grisu.client.gridFtpTests.GridFtpTestController;
-import org.vpac.grisu.client.gridFtpTests.GridFtpTestElement;
-import org.vpac.grisu.client.gridFtpTests.TestSetupException;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpAction;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpActionItem;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpTestController;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpTestElement;
+import org.vpac.grisu.clients.gridFtpTests.TestSetupException;
 import org.vpac.grisu.model.MountPoint;
 
 public class HundredTimesLs extends GridFtpTestElement {

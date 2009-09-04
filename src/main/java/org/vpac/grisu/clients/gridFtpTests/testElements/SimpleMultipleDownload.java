@@ -1,4 +1,4 @@
-package org.vpac.grisu.client.gridFtpTests.testElements;
+package org.vpac.grisu.clients.gridFtpTests.testElements;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -8,19 +8,19 @@ import java.util.Set;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 
-import org.vpac.grisu.client.gridFtpTests.GridFtpAction;
-import org.vpac.grisu.client.gridFtpTests.GridFtpActionItem;
-import org.vpac.grisu.client.gridFtpTests.GridFtpTestController;
-import org.vpac.grisu.client.gridFtpTests.GridFtpTestElement;
-import org.vpac.grisu.client.gridFtpTests.TestSetupException;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpAction;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpActionItem;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpTestController;
+import org.vpac.grisu.clients.gridFtpTests.GridFtpTestElement;
+import org.vpac.grisu.clients.gridFtpTests.TestSetupException;
 import org.vpac.grisu.model.MountPoint;
 
-public class HundredTimesMultipleDownload extends GridFtpTestElement {
+public class SimpleMultipleDownload extends GridFtpTestElement {
 
 	private final String sourceFile;
 	private final String targetFolder;
 
-	public HundredTimesMultipleDownload(GridFtpTestController controller,
+	public SimpleMultipleDownload(GridFtpTestController controller,
 			Set<MountPoint> mps) throws TestSetupException {
 
 		super(controller, mps);
@@ -79,7 +79,7 @@ public class HundredTimesMultipleDownload extends GridFtpTestElement {
 		// upload file
 		for (MountPoint mp : mountpoints) {
 
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < controller.getConcurrentThreads(); i++) {
 				GridFtpActionItem item = new GridFtpActionItem(mp.getAlias()
 						+ i, action, mp.getRootUrl() + "/simpleTestFile.txt",
 						targetFolder + File.separator + "targetFile_" + i);
@@ -115,12 +115,12 @@ public class HundredTimesMultipleDownload extends GridFtpTestElement {
 
 	@Override
 	public String getTestName() {
-		return "HundredTimesMultipleDownload";
+		return "SimpleMultipleDownload";
 	}
 
 	@Override
 	public String getDescription() {
-		return "A very simple multiple download of a small text file. This test downloads the file 100 times from the same filesystem.";
+		return "A very simple multiple download of a small text file. This test downloads as many times from the same filesystem as there are concurrent threads in this testrun.";
 	}
 
 }

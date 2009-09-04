@@ -1,4 +1,4 @@
-package org.vpac.grisu.client.gridFtpTests;
+package org.vpac.grisu.clients.gridFtpTests;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,4 +1,4 @@
-package org.vpac.grisu.client.gridFtpTests;
+package org.vpac.grisu.clients.gridFtpTests;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;

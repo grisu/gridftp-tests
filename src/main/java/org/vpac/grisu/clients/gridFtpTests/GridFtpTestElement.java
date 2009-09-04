@@ -1,4 +1,4 @@
-package org.vpac.grisu.client.gridFtpTests;
+package org.vpac.grisu.clients.gridFtpTests;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
