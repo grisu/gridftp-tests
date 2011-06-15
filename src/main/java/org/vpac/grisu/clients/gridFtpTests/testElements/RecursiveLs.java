@@ -1,5 +1,7 @@
 package org.vpac.grisu.clients.gridFtpTests.testElements;
 
+import grisu.model.MountPoint;
+
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +12,6 @@ import org.vpac.grisu.clients.gridFtpTests.GridFtpActionItem;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestController;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestElement;
 import org.vpac.grisu.clients.gridFtpTests.TestSetupException;
-import org.vpac.grisu.model.MountPoint;
 
 public class RecursiveLs extends GridFtpTestElement {
 
@@ -18,29 +19,29 @@ public class RecursiveLs extends GridFtpTestElement {
 	private final String targetFolder;
 
 	public RecursiveLs(GridFtpTestController controller, Set<MountPoint> mps)
-			throws TestSetupException {
+	throws TestSetupException {
 
 		super(controller, mps);
 
 		targetFolder = controller.getGridTestDirectory() + File.separator
-				+ "temp";
+		+ "temp";
 
 		try {
 			if (!new File(targetFolder).exists()) {
 				if (!new File(targetFolder).mkdirs()) {
 					throw new TestSetupException(
 							"Could not create temp target directory: "
-									+ targetFolder);
+							+ targetFolder);
 				}
 			}
 		} catch (final Exception e) {
 			throw new TestSetupException(
 					"Could not create temp target directory: "
-							+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage());
 		}
 
 		sourceFile = controller.getGridTestDirectory() + File.separator
-				+ "simpleTestSource.txt";
+		+ "simpleTestSource.txt";
 		// check whether source file exists...
 		if (!new File(sourceFile).exists()) {
 			throw new TestSetupException("Source file " + sourceFile

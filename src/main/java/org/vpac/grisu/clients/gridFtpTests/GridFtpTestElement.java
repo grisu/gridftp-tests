@@ -1,5 +1,7 @@
 package org.vpac.grisu.clients.gridFtpTests;
 
+import grisu.model.MountPoint;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
@@ -7,14 +9,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.vpac.grisu.model.MountPoint;
 
 public abstract class GridFtpTestElement {
 
 	public static final String[] IMPLEMENTED_TESTS = new String[] {
-			"SimpleUploadTest", "FiveTimesMultipleUpload",
-			"SimpleMultipleUpload", "HundredTimesMultipleUpload",
-			"HundredTimesMultipleDownload", "SimpleMultipleDownload" };
+		"SimpleUploadTest", "FiveTimesMultipleUpload",
+		"SimpleMultipleUpload", "HundredTimesMultipleUpload",
+		"HundredTimesMultipleDownload", "SimpleMultipleDownload" };
 
 	static final Logger myLogger = Logger.getLogger(GridFtpTestElement.class
 			.getName());
@@ -24,7 +25,7 @@ public abstract class GridFtpTestElement {
 			Set<MountPoint> mps) {
 
 		final List<GridFtpTestElement> result = new LinkedList<GridFtpTestElement>();
-		if (testnames == null || testnames.length == 0) {
+		if ((testnames == null) || (testnames.length == 0)) {
 			testnames = IMPLEMENTED_TESTS;
 		}
 
@@ -32,24 +33,24 @@ public abstract class GridFtpTestElement {
 
 			try {
 				final Class testElementClass = Class
-						.forName("org.vpac.grisu.clients.gridFtpTests.testElements."
-								+ testname);
+				.forName("org.vpac.grisu.clients.gridFtpTests.testElements."
+						+ testname);
 
 				final Constructor testElementConstructor = testElementClass
-						.getConstructor(GridFtpTestController.class, Set.class);
+				.getConstructor(GridFtpTestController.class, Set.class);
 
 				final GridFtpTestElement el = (GridFtpTestElement) testElementConstructor
-						.newInstance(controller, mps);
+				.newInstance(controller, mps);
 				result.add(el);
 			} catch (final Exception e) {
 				if (e instanceof InvocationTargetException) {
 					System.err
-							.println("Couldn't setup test "
-									+ testname
-									+ ": "
-									+ ((InvocationTargetException) e)
-											.getTargetException()
-											.getLocalizedMessage());
+					.println("Couldn't setup test "
+							+ testname
+							+ ": "
+							+ ((InvocationTargetException) e)
+							.getTargetException()
+							.getLocalizedMessage());
 					System.exit(1);
 				} else {
 					System.err.println("Couldn't setup test " + testname + ": "
@@ -127,12 +128,12 @@ public abstract class GridFtpTestElement {
 					if (onlyFailed && item.isSuccess()) {
 						continue;
 					} else {
-						if ((item.getSource() != null && item.getSource()
+						if (((item.getSource() != null) && item.getSource()
 								.contains(mp.getRootUrl()))) {
 							// means mountpoint was used as source
 							sourceResults.append(item.getResult(showStackTrace,
 									shortVersion));
-						} else if (item.getTarget() != null
+						} else if ((item.getTarget() != null)
 								&& item.getTarget().contains(mp.getRootUrl())) {
 							// means mountpoint was used as target
 							targetResults.append(item.getResult(showStackTrace,
@@ -141,7 +142,7 @@ public abstract class GridFtpTestElement {
 					}
 				}
 			}
-			if (sourceResults.length() > 0 || targetResults.length() > 0) {
+			if ((sourceResults.length() > 0) || (targetResults.length() > 0)) {
 				result.append("\tMountPoint: " + mp.getRootUrl() + " (VO: "
 						+ mp.getFqan() + ")");
 				if (sourceResults.length() > 0) {

@@ -1,5 +1,7 @@
 package org.vpac.grisu.clients.gridFtpTests.testElements;
 
+import grisu.model.MountPoint;
+
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +12,6 @@ import org.vpac.grisu.clients.gridFtpTests.GridFtpActionItem;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestController;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestElement;
 import org.vpac.grisu.clients.gridFtpTests.TestSetupException;
-import org.vpac.grisu.model.MountPoint;
 
 public class FiveTimesMultipleUpload extends GridFtpTestElement {
 
@@ -23,7 +24,7 @@ public class FiveTimesMultipleUpload extends GridFtpTestElement {
 		super(controller, mps);
 
 		sourceFile = controller.getGridTestDirectory() + File.separator
-				+ "simpleTestSource.txt";
+		+ "simpleTestSource.txt";
 		// check whether source file exists...
 		if (!new File(sourceFile).exists()) {
 			throw new TestSetupException("Source file " + sourceFile
@@ -67,7 +68,7 @@ public class FiveTimesMultipleUpload extends GridFtpTestElement {
 			for (int i = 0; i < 5; i++) {
 				final GridFtpActionItem item = new GridFtpActionItem(
 						mp.getAlias() + i, action, sourceFile, mp.getRootUrl()
-								+ "/" + targetFileName + i);
+						+ "/" + targetFileName + i);
 				list.add(item);
 			}
 
@@ -83,7 +84,7 @@ public class FiveTimesMultipleUpload extends GridFtpTestElement {
 			for (int i = 0; i < 5; i++) {
 				final GridFtpActionItem item = new GridFtpActionItem(
 						mp.getAlias() + i, action, mp.getRootUrl() + "/"
-								+ targetFileName + i, null);
+						+ targetFileName + i, null);
 				list.add(item);
 			}
 		}

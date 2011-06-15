@@ -1,5 +1,7 @@
 package org.vpac.grisu.clients.gridFtpTests.testElements;
 
+import grisu.model.MountPoint;
+
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +15,6 @@ import org.vpac.grisu.clients.gridFtpTests.GridFtpActionItem;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestController;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestElement;
 import org.vpac.grisu.clients.gridFtpTests.TestSetupException;
-import org.vpac.grisu.model.MountPoint;
 
 public class SimpleMultipleDownload extends GridFtpTestElement {
 
@@ -26,24 +27,24 @@ public class SimpleMultipleDownload extends GridFtpTestElement {
 		super(controller, mps);
 
 		targetFolder = controller.getGridTestDirectory() + File.separator
-				+ "temp";
+		+ "temp";
 
 		try {
 			if (!new File(targetFolder).exists()) {
 				if (!new File(targetFolder).mkdirs()) {
 					throw new TestSetupException(
 							"Could not create temp target directory: "
-									+ targetFolder);
+							+ targetFolder);
 				}
 			}
 		} catch (final Exception e) {
 			throw new TestSetupException(
 					"Could not create temp target directory: "
-							+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage());
 		}
 
 		sourceFile = controller.getGridTestDirectory() + File.separator
-				+ "simpleTestSource.txt";
+		+ "simpleTestSource.txt";
 		// check whether source file exists...
 		if (!new File(sourceFile).exists()) {
 			throw new TestSetupException("Source file " + sourceFile
@@ -99,8 +100,8 @@ public class SimpleMultipleDownload extends GridFtpTestElement {
 			for (int i = 0; i < controller.getConcurrentThreads(); i++) {
 				final GridFtpActionItem item = new GridFtpActionItem(
 						mp.getAlias() + i, action, mp.getRootUrl()
-								+ "/simpleTestFile.txt", targetFolder
-								+ File.separator + "targetFile_" + i);
+						+ "/simpleTestFile.txt", targetFolder
+						+ File.separator + "targetFile_" + i);
 				list.add(item);
 			}
 

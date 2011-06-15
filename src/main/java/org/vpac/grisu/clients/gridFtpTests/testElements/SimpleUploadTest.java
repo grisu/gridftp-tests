@@ -1,5 +1,7 @@
 package org.vpac.grisu.clients.gridFtpTests.testElements;
 
+import grisu.model.MountPoint;
+
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +14,6 @@ import org.vpac.grisu.clients.gridFtpTests.GridFtpActionItem;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestController;
 import org.vpac.grisu.clients.gridFtpTests.GridFtpTestElement;
 import org.vpac.grisu.clients.gridFtpTests.TestSetupException;
-import org.vpac.grisu.model.MountPoint;
 
 public class SimpleUploadTest extends GridFtpTestElement {
 
@@ -26,7 +27,7 @@ public class SimpleUploadTest extends GridFtpTestElement {
 		super(controller, mps);
 
 		sourceFile = controller.getGridTestDirectory() + File.separator
-				+ "simpleTestSource.txt";
+		+ "simpleTestSource.txt";
 		// check whether source file exists...
 		if (!new File(sourceFile).exists()) {
 			throw new TestSetupException("Source file " + sourceFile
@@ -38,7 +39,7 @@ public class SimpleUploadTest extends GridFtpTestElement {
 		}
 
 		targetDownloadFolder = System.getProperty("java.io.tmpdir")
-				+ File.separator + "downloadTarget";
+		+ File.separator + "downloadTarget";
 		FileUtils.deleteQuietly(new File(targetDownloadFolder));
 		new File(targetDownloadFolder).mkdirs();
 		if (!new File(targetDownloadFolder).getParentFile().canWrite()) {
@@ -88,7 +89,7 @@ public class SimpleUploadTest extends GridFtpTestElement {
 			final GridFtpActionItem item = new GridFtpActionItem(mp.getAlias(),
 					action, mp.getRootUrl() + "/" + targetFileName,
 					targetDownloadFolder + File.separator
-							+ UUID.randomUUID().toString());
+					+ UUID.randomUUID().toString());
 			list.add(item);
 		}
 		actionItems.add(list);

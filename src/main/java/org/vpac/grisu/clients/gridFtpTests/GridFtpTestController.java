@@ -1,5 +1,17 @@
 package org.vpac.grisu.clients.gridFtpTests;
 
+import grisu.control.ServiceInterface;
+import grisu.frontend.control.login.LoginManager;
+import grisu.frontend.control.login.LoginParams;
+import grisu.jcommons.constants.GridEnvironment;
+import grisu.jcommons.dependencies.ClasspathHacker;
+import grisu.jcommons.dependencies.Dependency;
+import grisu.jcommons.dependencies.DependencyManager;
+import grisu.model.GrisuRegistry;
+import grisu.model.GrisuRegistryManager;
+import grisu.model.MountPoint;
+import grisu.settings.Environment;
+import grisu.utils.GrisuPluginFilenameFilter;
 import grith.jgrith.plainProxy.LocalProxy;
 
 import java.io.File;
@@ -21,19 +33,6 @@ import java.util.concurrent.TimeUnit;
 import jline.ConsoleReader;
 
 import org.apache.commons.lang.StringUtils;
-import org.vpac.grisu.control.ServiceInterface;
-import org.vpac.grisu.frontend.control.login.LoginManager;
-import org.vpac.grisu.frontend.control.login.LoginParams;
-import org.vpac.grisu.model.GrisuRegistry;
-import org.vpac.grisu.model.GrisuRegistryManager;
-import org.vpac.grisu.model.MountPoint;
-import org.vpac.grisu.settings.Environment;
-import org.vpac.grisu.utils.GrisuPluginFilenameFilter;
-
-import au.org.arcs.jcommons.constants.ArcsEnvironment;
-import au.org.arcs.jcommons.dependencies.ClasspathHacker;
-import au.org.arcs.jcommons.dependencies.Dependency;
-import au.org.arcs.jcommons.dependencies.DependencyManager;
 
 public class GridFtpTestController {
 
@@ -42,7 +41,7 @@ public class GridFtpTestController {
 		String name = GridFtpTestController.class.getName();
 		name = name.replace('.', '/') + ".class";
 		final URL url = GridFtpTestController.class.getClassLoader()
-				.getResource(name);
+		.getResource(name);
 		final String path = url.getPath();
 		// System.out.println("Executable path: "+path);
 		String baseDir = null;
@@ -64,7 +63,7 @@ public class GridFtpTestController {
 	}
 
 	private final List<String> failedTestRunIds = Collections
-			.synchronizedList(new LinkedList<String>());
+	.synchronizedList(new LinkedList<String>());
 
 	private final String grisu_base_directory;
 
@@ -93,7 +92,7 @@ public class GridFtpTestController {
 
 		if (StringUtils.isBlank(grisu_base_directory_param)) {
 			this.grisu_base_directory = System.getProperty("user.home")
-					+ File.separator + "grisu-gridftp-tests";
+			+ File.separator + "grisu-gridftp-tests";
 		} else {
 			this.grisu_base_directory = grisu_base_directory_param;
 		}
@@ -105,7 +104,7 @@ public class GridFtpTestController {
 		dependencies.put(Dependency.BOUNCYCASTLE, "jdk15-143");
 
 		DependencyManager.addDependencies(dependencies,
-				ArcsEnvironment.getArcsCommonJavaLibDirectory());
+				GridEnvironment.getGridCommonJavaLibDirectory());
 
 		ClasspathHacker.initFolder(Environment.getGrisuPluginDirectory(),
 				new GrisuPluginFilenameFilter());
@@ -117,7 +116,7 @@ public class GridFtpTestController {
 			// + File.separator + "grid-tests-hibernate-file.cfg.xml");
 
 			final Class hsfc = Class
-					.forName("org.vpac.grisu.backend.hibernate.HibernateSessionFactory");
+			.forName("org.vpac.grisu.backend.hibernate.HibernateSessionFactory");
 			final Method method = hsfc.getMethod(
 					"setCustomHibernateConfigFile", String.class);
 
@@ -135,7 +134,7 @@ public class GridFtpTestController {
 		grid_tests_directory = new File(this.grisu_base_directory, "tests");
 
 		output = grid_tests_directory + File.separator + "testResults_"
-				+ new Date().getTime() + ".log";
+		+ new Date().getTime() + ".log";
 
 		final GridFtpTestCommandlineOptions options = new GridFtpTestCommandlineOptions(
 				args);
@@ -144,8 +143,8 @@ public class GridFtpTestController {
 
 		displayOnlyFailed = options.displayOnlyFailed();
 
-		if (options.getMyproxyUsername() != null
-				&& options.getMyproxyUsername().length() != 0) {
+		if ((options.getMyproxyUsername() != null)
+				&& (options.getMyproxyUsername().length() != 0)) {
 			try {
 				final ConsoleReader consoleReader = new ConsoleReader();
 				final char[] password = consoleReader.readLine(
@@ -153,8 +152,8 @@ public class GridFtpTestController {
 						new Character('*')).toCharArray();
 
 				final LoginParams loginParams = new LoginParams(
-				// "http://localhost:8080/grisu-ws/services/grisu",
-				// "https://ngportaldev.vpac.org/grisu-ws/services/grisu",
+						// "http://localhost:8080/grisu-ws/services/grisu",
+						// "https://ngportaldev.vpac.org/grisu-ws/services/grisu",
 						"Local", options.getMyproxyUsername(), password);
 
 				serviceInterface = LoginManager.login(null, null, null, null,
@@ -189,7 +188,7 @@ public class GridFtpTestController {
 			fqans = options.getFqans();
 		}
 
-		if (options.getOutput() != null && options.getOutput().length() > 0) {
+		if ((options.getOutput() != null) && (options.getOutput().length() > 0)) {
 			output = options.getOutput();
 		}
 
@@ -210,8 +209,8 @@ public class GridFtpTestController {
 
 			final Set<MountPoint> mountPointsToUse = calculateMountPointsToUse();
 			final List<GridFtpTestElement> elements = GridFtpTestElement
-					.generateGridTestInfos(this, gridtestNames,
-							mountPointsToUse);
+			.generateGridTestInfos(this, gridtestNames,
+					mountPointsToUse);
 
 			System.out.println("Available tests: ");
 			for (final GridFtpTestElement element : elements) {
@@ -230,11 +229,11 @@ public class GridFtpTestController {
 								+ ")");
 						if (item.getSource() != null) {
 							System.out
-									.println("\tSource:\t" + item.getSource());
+							.println("\tSource:\t" + item.getSource());
 						}
 						if (item.getTarget() != null) {
 							System.out
-									.println("\tTarget:\t" + item.getTarget());
+							.println("\tTarget:\t" + item.getTarget());
 						}
 						System.out.println();
 					}
@@ -304,7 +303,7 @@ public class GridFtpTestController {
 		final Set<MountPoint> mountPointsToUse = calculateMountPointsToUse();
 
 		final List<GridFtpTestElement> elements = GridFtpTestElement
-				.generateGridTestInfos(this, gridtestNames, mountPointsToUse);
+		.generateGridTestInfos(this, gridtestNames, mountPointsToUse);
 
 		for (final GridFtpTestElement element : elements) {
 
@@ -315,7 +314,7 @@ public class GridFtpTestController {
 						+ oneTestStage.get(0).getAction().getName());
 
 				final ExecutorService actionExecutor = Executors
-						.newFixedThreadPool(threads);
+				.newFixedThreadPool(threads);
 
 				for (final GridFtpActionItem item : oneTestStage) {
 
