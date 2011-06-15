@@ -54,30 +54,32 @@ public class GridFtpTestCommandlineOptions {
 		final Option apps = createOptionWithArg(
 				"tests",
 				"t",
-				"the names of the tests to run (seperated with a comma). If not specified, all tests will run.");
+		"the names of the tests to run (seperated with a comma). If not specified, all tests will run.");
 		final Option myProxyUsername = createOptionWithArg("username", "u",
-				"the myproxy username to use");
+		"the myproxy username to use");
 		final Option fqan = createOptionWithArg("vos", "v",
-				"the vos to use, seperated with a comma");
+		"the vos to use, seperated with a comma");
 		final Option outputFile = createOptionWithArg("output", "o",
-				"the output file");
+		"the output file");
+		final Option backend = createOptionWithArg("backend", "b",
+		"the backend to connect to");
 		final Option exclude = createOptionWithArg(
 				"exclude",
 				"e",
-				"(comma-seperated) filters to exclude certain hostnames/queues. Only used if the \"include\" option wasn't specified");
+		"(comma-seperated) filters to exclude certain hostnames/queues. Only used if the \"include\" option wasn't specified");
 		final Option include = createOptionWithArg("include", "i",
-				"(comma-seperated) filters to only include certain hostnames");
+		"(comma-seperated) filters to only include certain hostnames");
 		final Option timeoutInMinutes = createOptionWithArg(
 				"cancel",
 				"c",
-				"timeout in minutes after which all jobs that aren't finished are getting killed (default: 240)");
+		"timeout in minutes after which all jobs that aren't finished are getting killed (default: 240)");
 		final Option list = createOption("list", "l",
-				"list all available tests");
+		"list all available tests");
 		final Option threads = createOptionWithArg("simultaneousThreads", "s",
-				"how many jobs to submit at once. Default is 5 (which is recommended)");
+		"how many jobs to submit at once. Default is 5 (which is recommended)");
 		final Option help = createOption("help", "h", "this help text");
 		final Option onlyFailed = createOption("displayOnlyFailed", "f",
-				"display only failed test items");
+		"display only failed test items");
 
 		options = new Options();
 		options.addOption(apps);
@@ -91,6 +93,7 @@ public class GridFtpTestCommandlineOptions {
 		options.addOption(threads);
 		options.addOption(help);
 		options.addOption(onlyFailed);
+		options.addOption(backend);
 		return options;
 	}
 
@@ -102,7 +105,7 @@ public class GridFtpTestCommandlineOptions {
 	private String[] excludes = new String[] {};
 	private String[] includes = new String[] {};
 	private String myproxyUsername;
-	private String url;
+	private String url = "Local";
 
 	private String output;
 
@@ -206,6 +209,10 @@ public class GridFtpTestCommandlineOptions {
 			displayOnlyFailed = true;
 		}
 
+		if (line.hasOption("backend")) {
+			url = line.getOptionValue("backend");
+		}
+
 		if (line.hasOption("list")) {
 			list = true;
 		}
@@ -250,7 +257,7 @@ public class GridFtpTestCommandlineOptions {
 						.getOptionValue("simultaneousThreads"));
 			} catch (final Exception e) {
 				System.err
-						.println("SimultaneousThreads value is not an integer.");
+				.println("SimultaneousThreads value is not an integer.");
 				formatter.printHelp("grisu-grid-test", this.options);
 				System.exit(1);
 			}

@@ -18,6 +18,14 @@
 			<source>grisu-server.config</source>
 			<outputDirectory>/gridftp-tests</outputDirectory>
 		</file>
+		<file>
+			<source>bcprov.jar</source>
+			<outputDirectory>/gridftp-tests</outputDirectory>
+		</file>
+		<file>
+			<source>simpleTestSource.txt</source>
+			<outputDirectory>/gridftp-tests/tests</outputDirectory>
+		</file>
 	</files>
   <fileSets>
     <fileSet>

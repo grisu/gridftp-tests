@@ -154,7 +154,8 @@ public class GridFtpTestController {
 				final LoginParams loginParams = new LoginParams(
 						// "http://localhost:8080/grisu-ws/services/grisu",
 						// "https://ngportaldev.vpac.org/grisu-ws/services/grisu",
-						"Local", options.getMyproxyUsername(), password);
+						options.getServiceInterfaceUrl(),
+						options.getMyproxyUsername(), password);
 
 				serviceInterface = LoginManager.login(null, null, null, null,
 						loginParams);
@@ -166,7 +167,8 @@ public class GridFtpTestController {
 		} else {
 			// trying to get local proxy
 
-			final LoginParams loginParams = new LoginParams("Local", null,
+			final LoginParams loginParams = new LoginParams(
+					options.getServiceInterfaceUrl(), null,
 					null, "myproxy2.arcs.org.au", "443");
 			try {
 				serviceInterface = LoginManager.login(

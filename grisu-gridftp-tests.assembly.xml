@@ -12,7 +12,8 @@
 			<useProjectArtifact>true</useProjectArtifact>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>org.vpac.grisu:gridftp-tests</include>
+				<include>grisu.frontend:gridftp-tests</include>
+				<include>grisu.backend:grisu-core</include>
 			</includes>
 			<excludes>
 				<exclude>junit:junit</exclude>
@@ -32,7 +33,7 @@
 	<!-- probably unnecessary -->
 	<files>
 		<file>
-			<source>src/main/resources/log4j.properties</source>
+			<source>src/main/resources/log4j.xml</source>
 			<outputDirectory>/</outputDirectory>
 		</file>
 		<file>
