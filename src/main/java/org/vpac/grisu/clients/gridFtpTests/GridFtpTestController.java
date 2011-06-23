@@ -169,7 +169,8 @@ public class GridFtpTestController {
 
 			final LoginParams loginParams = new LoginParams(
 					options.getServiceInterfaceUrl(), null,
-					null, "myproxy2.arcs.org.au", "443");
+ null,
+					"myproxy.arcs.org.au", "443");
 			try {
 				serviceInterface = LoginManager.login(
 						LocalProxy.loadGlobusCredential(), null, null, null,

@@ -46,12 +46,6 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>grisu.backend</groupId>
-			<artifactId>grisu-core</artifactId>
-			<version>${grisu.dependency.version}</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -110,6 +104,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<grisu.dependency.version>0.3.4.1-SNAPSHOT</grisu.dependency.version>
+		<grisu.dependency.version>0.3.5-SNAPSHOT</grisu.dependency.version>
 	</properties>
 </project>
